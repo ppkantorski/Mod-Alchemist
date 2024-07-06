@@ -14,7 +14,7 @@ The `package.ini` file contains the following configurations:
 - `[Enable All]`: Enables all mods based on search patterns.
 - `[Disable All]`: Disables all mods based on search patterns.
 
-### Mod Management
+### Mod Conversion
 - `[*pchtxt -> ips]`: Converts pchtxt files to IPS patches.
 - `[*pchtxt -> cheat]`: Converts pchtxt files to cheat codes.
 
