@@ -1,5 +1,5 @@
 # Mod Alchemist
-The Mod Alchemist package provides various modifications and enhancements for your device.
+An Ultrahand package designed for managing and converting mods.
 
 ## Configuration
 
