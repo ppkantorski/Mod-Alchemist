@@ -5,6 +5,7 @@ An Ultrahand package designed for managing and converting mods.
 
 The `package.ini` file contains the following configurations:
 
+### Mod Management
 - `[*Toggle exeFS Patches]`: Toggles exeFS patches by selection.
 - `[*Delete exeFS Patches]`: Deletes selected exeFS patches.
 - `[*Toggle Content Mods]`: Toggles content modifications by selection.
@@ -12,6 +13,8 @@ The `package.ini` file contains the following configurations:
 - `[*Search Pattern]`: Configure search patterns for mod groups.
 - `[Enable All]`: Enables all mods based on search patterns.
 - `[Disable All]`: Disables all mods based on search patterns.
+
+### Mod Management
 - `[*pchtxt -> ips]`: Converts pchtxt files to IPS patches.
 - `[*pchtxt -> cheat]`: Converts pchtxt files to cheat codes.
 
