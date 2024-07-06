@@ -1,4 +1,4 @@
-# Mod-Alchemist
+# Mod Alchemist
 The Mod Alchemist package provides various modifications and enhancements for your device.
 
 ## Configuration
