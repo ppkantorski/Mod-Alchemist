@@ -19,7 +19,7 @@ Each configuration has a set of commands that perform the corresponding actions.
 
 ## Obtaining Mods
 
-To use the mods provided in the Mod Master package, you will need to obtain them separately. The mods should be placed in the appropriate folders within the `Mod Master` directory.
+To use the mods provided in the Mod Alchemist package, you will need to obtain them separately. The mods should be placed in the appropriate folders within the `Mod Alchemist` directory.
 
 Please refer to the shared documentation or additional resources to acquire the specific mods you are interested in. Once you have obtained the mods, place them in the corresponding folders within the `Mod Alchemist` directory.
 
