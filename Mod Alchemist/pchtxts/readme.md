@@ -1,3 +1,3 @@
-Format for adding pchtxts is as follows.
+Format for adding pchtxts to this folder is as follows.
 
 `/{TITLE_NAME} - {MOD_NAME}/{VERSION}.pchtxt`
