@@ -17,16 +17,16 @@ Each configuration has a set of commands that perform the corresponding actions.
 
 To use the mods provided in the Mod Master package, you will need to obtain them separately. The mods should be placed in the appropriate folders within the `Mod Master` directory.
 
-Please refer to the shared documentation or additional resources to acquire the specific mods you are interested in. Once you have obtained the mods, place them in the corresponding folders within the `Mod Master` directory.
+Please refer to the shared documentation or additional resources to acquire the specific mods you are interested in. Once you have obtained the mods, place them in the corresponding folders within the `Mod Alchemist` directory.
 
 ## Usage
 
 To use Mod Master:
 
-1. Open the `package.ini` file located in the `examples/Mod Master` directory.
+1. Open the `package.ini` file located in the `examples/Mod Alchemist` directory.
 2. Uncomment the desired configuration and its corresponding commands by removing the semicolon (`;`) at the beginning of each line.
 3. Save the `package.ini` file after making the necessary changes.
-4. Copy the `Mod Master` directory to your switch under `/config/ultrahand/` by placing it in that location.
+4. Copy the `Mod Alchemist` directory to your switch under `/config/ultrahand/` by placing it in that location.
 
 Note: Make sure you have organized the mods properly within the subdirectories as mentioned in the "Obtaining Mods" section.
 
