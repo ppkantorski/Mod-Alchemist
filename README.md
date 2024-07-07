@@ -1,6 +1,8 @@
 # Mod Alchemist
 An Ultrahand package designed for managing and converting mods.
 
+![banner](.pics/banner.png)
+
 ## Configuration
 
 The `package.ini` file contains the following configurations:
