@@ -1,4 +1,4 @@
-# Mod Alchemist
+# Mod Alchemist (Ultrahand v1.6.5+)
 An Ultrahand package designed for managing and converting mods.
 
 ![banner](.pics/banner.png)
