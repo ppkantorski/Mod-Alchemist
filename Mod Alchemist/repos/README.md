@@ -1,4 +1,4 @@
-All credits for these public repositories go to the developers.
+All credits for these public repositories go to their developers.
 
 https://github.com/Fl4sh9174/Switch-Ultrawide-Mods
 
