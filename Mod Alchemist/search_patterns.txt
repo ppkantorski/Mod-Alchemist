@@ -1,5 +1,5 @@
 21.9
-ultrawide
+Ultrawide
 UltraWide
 1080
 FPS
