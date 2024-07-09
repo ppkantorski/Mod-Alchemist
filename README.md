@@ -1,5 +1,5 @@
 # Mod Alchemist (Ultrahand v1.6.5+)
-An Ultrahand package designed for managing and converting mods.
+An Ultrahand package designed for managing and converting mods on the Nintendo Switch.
 
 ![banner](.pics/banner.png)
 
