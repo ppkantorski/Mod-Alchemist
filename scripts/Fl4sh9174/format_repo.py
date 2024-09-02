@@ -3,6 +3,14 @@ import zipfile
 import shutil
 import re
 import sys
+import unicodedata
+
+def sanitize_name(name):
+    # Normalize the name to remove accents and special characters
+    normalized_name = unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode('ascii')
+    # Replace any remaining apostrophes and other unwanted characters
+    sanitized_name = normalized_name.replace("'", "").replace("’", "").replace("`", "").replace('"', '')
+    return sanitized_name
 
 def unzip_files(folder_path):
     print("Unzipping files...")
@@ -10,6 +18,7 @@ def unzip_files(folder_path):
         if item.endswith('.zip'):
             file_path = os.path.join(folder_path, item)
             game_name = re.sub(r'\[.*?\]', '', item).replace('.zip', '').strip()
+            game_name = sanitize_name(game_name)  # Sanitize game name here
             extract_to = os.path.join(folder_path, game_name)
             with zipfile.ZipFile(file_path, 'r') as zip_ref:
                 zip_ref.extractall(extract_to)
@@ -32,7 +41,8 @@ def create_formatted_structure(folder_path):
                         if mod_name_match:
                             mod_name_with_version = mod_name_match.group(1)
                             mod_name = re.sub(r' v[0-9.]+$', '', mod_name_with_version).strip()
-                            game_name = game_dir
+                            mod_name = sanitize_name(mod_name)  # Sanitize mod name here
+                            game_name = sanitize_name(game_dir)  # Sanitize game name here
                             version = file.replace('.pchtxt', '').strip()
                             
                             new_dir = os.path.join(formatted_path, f"{game_name} - {mod_name}")
