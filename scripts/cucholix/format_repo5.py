@@ -1,12 +1,19 @@
 import os
 import shutil
-import re
 import unicodedata
 import sys
 
 def sanitize_name(name):
+    # Remove accents and unwanted characters
     normalized = unicodedata.normalize('NFKD', name).encode('ascii', 'ignore').decode('ascii')
-    return normalized.replace("'", "").replace("’", "").replace("`", "").replace('"', '')
+    cleaned = normalized.replace("'", "").replace("’", "").replace("`", "").replace('"', '')
+    cleaned = cleaned.replace(" - ", " ")  # Remove " - " to avoid duplication
+    cleaned = ' '.join(cleaned.split())  # Collapse multiple spaces
+    return cleaned.strip()
+
+def title_case_preserve_numbers(name):
+    # Title-case words but preserve numbers and basic formatting
+    return ' '.join(word.capitalize() if not word.isupper() else word for word in name.split())
 
 def create_formatted_structure(root_folder):
     formatted_path = os.path.join(root_folder, 'formatted')
@@ -18,9 +25,16 @@ def create_formatted_structure(root_folder):
             if file.endswith('.pchtxt'):
                 version = file.replace('.pchtxt', '').strip()
 
-                # Determine game name: it's the folder just above the .pchtxt file
+                # Extract game name from parent folder
                 game_name = os.path.basename(os.path.dirname(os.path.join(root, file)))
                 game_name = sanitize_name(game_name)
+
+                # Remove trailing "Graphics" if it exists from old names
+                if game_name.endswith("Graphics"):
+                    game_name = game_name[:-len("Graphics")].strip()
+
+                # Apply proper title casing
+                game_name = title_case_preserve_numbers(game_name)
 
                 mod_name = "Graphics Mods"
                 target_dir = os.path.join(formatted_path, f"{game_name} - {mod_name}")
