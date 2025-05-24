@@ -1,6 +1,7 @@
 21.9
 Ultrawide
 UltraWide
+Graphics
 1080
 FPS
 fps
