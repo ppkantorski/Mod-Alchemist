@@ -41,7 +41,7 @@ ROMAN_NUMERAL_PATTERN = re.compile(
 # Known uppercase acronyms we want to preserve exactly
 ACRONYMS = {
     "HD", "2D", "3D", "4K", "VR", "AI", "API", "USB", "CPU", "GPU", "DVD", "CD",
-    "RPG", "FPS", "MMO", "MMORPG", "LAN", "GUI", "NPC", "FFVII", "FFVIII", "FX", "FFIX", "FFX", "FFXII", "2K"
+    "RPG", "FPS", "MMO", "MMORPG", "LAN", "GUI", "NPC", "FFVII", "FFVIII", "FX", "FFIX", "FFX", "FFXII", "2K", "V1", "V2", "V3", "V4"
 }
 
 def is_roman_numeral(word):
