@@ -40,7 +40,7 @@ ROMAN_NUMERAL_PATTERN = re.compile(
 # Known acronyms to force‐uppercase exactly
 ACRONYMS = {
     "HD", "2D", "3D", "4K", "VR", "AI", "API", "USB", "CPU", "GPU", "DVD", "CD",
-    "RPG", "FPS", "MMO", "MMORPG", "LAN", "GUI", "NPC", "FFVII", "FFVIII"
+    "RPG", "FPS", "MMO", "MMORPG", "LAN", "GUI", "NPC", "FFVII", "FFVIII", "FX", "FFIX", "FFX", "FFXII"
 }
 
 def is_roman_numeral(word):
