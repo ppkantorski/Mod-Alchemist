@@ -12,8 +12,22 @@ def sanitize_name(name):
     return cleaned.strip()
 
 def title_case_preserve_numbers(name):
-    # Title-case words but preserve numbers and basic formatting
-    return ' '.join(word.capitalize() if not word.isupper() else word for word in name.split())
+    # Capitalize title correctly with exceptions for filler words in the middle
+    lowercase_exceptions = {
+        "a", "an", "and", "as", "at", "but", "by", "for", "from", "in", "nor",
+        "of", "on", "or", "so", "the", "to", "yet", "with"
+    }
+
+    words = name.split()
+    result = []
+
+    for i, word in enumerate(words):
+        if (0 < i < len(words) - 1) and word.lower() in lowercase_exceptions:
+            result.append(word.lower())
+        else:
+            result.append(word.capitalize())
+
+    return ' '.join(result)
 
 def create_formatted_structure(root_folder):
     formatted_path = os.path.join(root_folder, 'formatted')
