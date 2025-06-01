@@ -22,21 +22,25 @@ def capitalize_hyphenated(word):
     capitalized = []
     for part in parts:
         if part:
-            capitalized.append(part[0].upper() + part[1:].lower() if len(part) > 1 else part.upper())
+            capitalized.append(
+                part[0].upper() + part[1:].lower() if len(part) > 1 else part.upper()
+            )
         else:
             capitalized.append('')
     return '-'.join(capitalized)
 
-# Regex for Roman numerals (supports up to 3999): I, II, III, IV, V, VI, VII, VIII, IX, X, XI, etc.
+# Regex for Roman numerals (supports up to 3999): I, II, III, IV, V, etc.
 ROMAN_NUMERAL_PATTERN = re.compile(
     r"^M{0,4}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$",
     re.IGNORECASE
 )
 
-# A set of known acronyms (fully uppercase) that should remain uppercase exactly as is.
+# A set of known acronyms that should remain uppercase exactly as is.
 ACRONYMS = {
     "HD", "2D", "3D", "4K", "VR", "AI", "API", "USB", "CPU", "GPU", "DVD", "CD",
-    "RPG", "FPS", "MMO", "MMORPG", "LAN", "GUI", "NPC", "FFVII", "FFVIII", "FX", "FFIX", "FFX", "FFXII"
+    "RPG", "FPS", "MMO", "MMORPG", "LAN", "GUI", "NPC",
+    "FFVII", "FFVIII", "FFIX", "FFX", "FFXII",
+    "FX", "2K", "5K", "8K", "V1", "V2", "V3", "V4", "DOF"
 }
 
 def is_roman_numeral(word):
@@ -46,10 +50,10 @@ def is_roman_numeral(word):
 def title_case_preserve_numbers(name):
     """
     Title-case with these rules:
-      • Fully uppercase acronyms remain unchanged (e.g. HD, 2D, 3D, FFVII, etc.).
-      • Roman numerals are fully uppercase (e.g. iI iIi → III, xI → XI).
-      • Hyphenated words are capitalized on both sides (→ Yooka-Laylee).
-      • Conjoined Roman numerals with '&', '+', or '|' become fully uppercase (e.g. I&ii → I&II).
+      • Fully uppercase acronyms remain unchanged.
+      • Roman numerals are fully uppercase.
+      • Hyphenated words are capitalized on both sides.
+      • Conjoined Roman numerals with '&', '+', or '|' become fully uppercase.
       • Small filler words (a, an, and, the, of, in, etc.) become lowercase
         only if they are in the middle of the title (not first, not last, not
         immediately after a subtitle marker).
@@ -64,7 +68,7 @@ def title_case_preserve_numbers(name):
 
     words = name.split()
     result = []
-    force_capitalize_mode = False  # Once True, stays True until next subtitle marker
+    force_capitalize_mode = False  # Once True, it stays True until next subtitle marker
 
     for idx, word in enumerate(words):
         # Detect if this word contains any subtitle marker character
@@ -85,31 +89,31 @@ def title_case_preserve_numbers(name):
             is_first = (idx == 0)
             is_last = (idx == len(words) - 1)
 
-            # Helper: capitalize a sub-word with special rules for acronyms, roman numerals, and conjoined numerals
+            # Helper: capitalize a sub-word with special rules
             def capitalize_special(w):
-                # If w (case-insensitive) is in our ACRONYMS set, uppercase it fully.
                 if w.upper() in ACRONYMS:
                     return w.upper()
-                # If w alone is a Roman numeral, uppercase it fully.
                 if is_roman_numeral(w):
                     return w.upper()
-                # Handle compound Roman numerals separated by &, +, or |
                 for sep in ['&', '+', '|']:
                     if sep in w:
-                        parts = w.split(sep)
-                        if all(is_roman_numeral(p) for p in parts):
-                            return sep.join(p.upper() for p in parts)
-                # Otherwise, capitalize hyphenated words normally.
+                        sub = w.split(sep)
+                        if all(is_roman_numeral(x) for x in sub):
+                            return sep.join(x.upper() for x in sub)
+                # Otherwise, capitalize hyphenated words normally
                 return capitalize_hyphenated(w)
 
             # Decide how to capitalize this segment:
-            if force_capitalize_mode or is_first or is_last or (lower_part not in lowercase_exceptions):
-                # Split hyphenated sub-parts, apply capitalize_special to each half
+            if (
+                force_capitalize_mode or
+                is_first or
+                is_last or
+                (lower_part not in lowercase_exceptions)
+            ):
                 sub_parts = part.split('-')
                 capitalized_sub_parts = [capitalize_special(sp) for sp in sub_parts]
                 capitalized_parts.append('-'.join(capitalized_sub_parts))
             else:
-                # It’s a lowercase exception in the middle of the title, so keep it lowercase.
                 capitalized_parts.append(lower_part)
 
         result.append(''.join(capitalized_parts))
@@ -118,14 +122,13 @@ def title_case_preserve_numbers(name):
         if not contains_marker:
             force_capitalize_mode = False
 
-    # Always capitalize the FIRST and LAST words in the entire title (using same special rules):
+    # Always re-capitalize FIRST and LAST words fully using the same special rules
     if result:
         first_word_parts = result[0].split('-')
         result[0] = '-'.join(
             sp.upper() if (sp.upper() in ACRONYMS or is_roman_numeral(sp)) else capitalize_hyphenated(sp)
             for sp in first_word_parts
         )
-
         last_word_parts = result[-1].split('-')
         result[-1] = '-'.join(
             sp.upper() if (sp.upper() in ACRONYMS or is_roman_numeral(sp)) else capitalize_hyphenated(sp)
@@ -145,7 +148,7 @@ def find_title_id(path):
 
 def extract_with_7z(rar_path, tmpdir):
     """
-    Extract only atmosphere/contents/* using 7z (same as your original).
+    Extract only atmosphere/contents/* using 7z.
     Return True if extraction succeeded (7z return code 0 OR
     we already found a Title ID folder inside tmpdir).
     """
@@ -160,24 +163,26 @@ def extract_with_7z(rar_path, tmpdir):
 
 def process_rar(root_folder, rar_relpath, output_root):
     """
-    1) Parse “release_<version>.rar” → version string.
+    1) Parse “release_<version>.rar” or “release_<version>.part01.rar” → version string.
     2) Sanitize + title-case the game folder name.
     3) Extract with 7z into a temp dir.
-    4) Find Title ID under any '*/contents/<16hex>/'.
+    4) Find Title ID under atmosphere/contents/<16hex>/.
     5) Copy that content into output/<GameName>/version/<TitleID>/.
     """
     subdir, filename = os.path.split(rar_relpath)
-    version_match = re.match(r"release_(.+)\.rar$", filename, re.I)
+
+    # New regex: capture base version, ignoring any “.partXX”
+    version_match = re.match(r"release_(.+?)(?:\.part\d+)?\.rar$", filename, re.IGNORECASE)
     if not version_match:
         print(f"❌ Invalid release name: {filename}")
         return
-    version = version_match.group(1)
+    version = version_match.group(1)     # e.g. “1.2.4” even if filename was “release_1.2.4.part01.rar”
     raw_game_name = os.path.basename(subdir)
 
-    # Clean & normalize game name
+    # 2) Clean & normalize game name
     cleaned_name = sanitize_name(raw_game_name)
-    game_name = title_case_preserve_numbers(cleaned_name)
-    pack_label = f"{game_name} - Graphics Pack"
+    game_name    = title_case_preserve_numbers(cleaned_name)
+    pack_label   = f"{game_name} - Graphics Pack"
 
     rar_path = os.path.join(root_folder, rar_relpath)
     with tempfile.TemporaryDirectory() as tmp:
@@ -189,7 +194,7 @@ def process_rar(root_folder, rar_relpath, output_root):
         title_id = find_title_id(tmp)
         if not title_id:
             print(f"❌ No Title ID found in {rar_relpath}")
-            return  # Skip if no valid Title ID folder
+            return
 
         version_dir = os.path.join(output_root, pack_label, version)
         os.makedirs(version_dir, exist_ok=True)
@@ -214,7 +219,22 @@ def main():
     tasks = []
     for dirpath, _, files in os.walk(root):
         for fn in files:
-            if re.match(r"release_.*\.rar$", fn, re.I):
+            # 1) Only consider RARs that are either:
+            #    • single-part: “release_<version>.rar”
+            #    • first part of multi-part: “release_<version>.part01.rar”
+            #
+            # Regex explanation:
+            #   release_        → literal prefix
+            #   (.+?)           → capture “version” (non-greedy)
+            #   (?:\.part\d+)?  → optionally “.partNN” (where NN = digits)
+            #   \.rar$          → end with “.rar”
+            m = re.match(r"release_(.+?)(?:\.part\d+)?\.rar$", fn, re.IGNORECASE)
+            if not m:
+                continue
+
+            # If it really is a “.partNN.rar” (some NN > 1), skip it.
+            # We only want “.part01” or no “.part” at all.
+            if fn.lower().endswith(".part01.rar") or fn.lower().endswith(".rar") and ".part" not in fn.lower():
                 rel = os.path.relpath(os.path.join(dirpath, fn), root)
                 tasks.append(rel)
 
