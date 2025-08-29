@@ -1,4 +1,4 @@
-# Mod Alchemist (Ultrahand v1.8.7+)
+# Alchemist (Ultrahand v2.1.0+)
 An Ultrahand package designed for managing and converting mods on the Nintendo Switch.
 
 ![banner](.pics/banner.png)
@@ -24,15 +24,15 @@ Each configuration has a set of commands that perform the corresponding actions.
 
 ## Obtaining Mods
 
-To use the mods provided in the Mod Alchemist package, you will need to obtain them separately. The mods should be placed in the appropriate folders within the `Mod Alchemist` directory.
+To use the mods provided in the Alchemist package, you will need to obtain them separately. The mods should be placed in the appropriate folders within the `Alchemist` directory.
 
-Please refer to the shared documentation or additional resources to acquire the specific mods you are interested in. Once you have obtained the mods, place them in the corresponding folders within the `Mod Alchemist` directory.
+Please refer to the shared documentation or additional resources to acquire the specific mods you are interested in. Once you have obtained the mods, place them in the corresponding folders within the `Alchemist` directory.
 
 ## Installation
 
-To install `Mod Alchemist`:
+To install `Alchemist`:
 
-1. Copy the `Mod Alchemist` directory to `/switch/.packages/`.
+1. Copy the `Alchemist` directory to `/switch/.packages/`.
 
 Note: Make sure you have organized the mods properly within the subdirectories as mentioned in the "Obtaining Mods" section.
 
