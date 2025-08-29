@@ -33,7 +33,7 @@ All options are accessible through `package.ini` and its included forwarders.
 
 #### Miscellaneous Tools
 - `Dot Clean` removes macOS metadata files (`._*`) from `/atmosphere/`, `/switch/`, `/config/`, or the entire SD card.  
-- `Software Update` integrates automatic updating of the Alchemist package and all associated mod repositories, with version information stored in `config.ini`.
+- `Software Update` integrates automatic updating of the Alchemist package and all associated mod repositories.
 
 ## Obtaining Mods
 
