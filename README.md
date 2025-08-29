@@ -52,4 +52,4 @@ Mods must be placed in the corresponding `repos/pchtxts/` or `repos/contents/` s
 
 ## Additional Information
 
-For detailed instructions, feature documentation, and support, see the [Ultrahand Overlay GitHub repository](https://github.com/ppkantorski/Ultrahand-Overlay).
+For detailed instructions, feature documentation, and support, see [Ultrahand Overlay](https://github.com/ppkantorski/Ultrahand-Overlay).
