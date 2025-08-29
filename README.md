@@ -32,7 +32,7 @@ Please refer to the shared documentation or additional resources to acquire the 
 
 To install `Alchemist`:
 
-1. Copy the `Alchemist` directory to `/switch/.packages/`.
+1. Unzip `Alchemist.zip` to the root of your SD card. The `Alchemist` directory will exist within `/switch/.packages/`.
 
 Note: Make sure you have organized the mods properly within the subdirectories as mentioned in the "Obtaining Mods" section.
 
